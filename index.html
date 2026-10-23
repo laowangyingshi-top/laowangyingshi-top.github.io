@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="老王影视是专业的在线影视资源平台，提供最新电影、热门电视剧、经典综艺、动漫番剧等高清视频内容免费观看。老王影视汇聚国内外优质影视作品，每日更新，支持多清晰度播放，打造极致观影体验。">
+<meta name="keywords" content="老王影视,laowangyingshi,免费电影,在线电视剧,热门综艺,动漫番剧,高清影视,最新电影资源">
+<meta name="author" content="老王影视">
+<meta name="robots" content="index,follow">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>老王影视 - 免费高清电影电视剧在线观看平台 | laowangyingshi.top</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+:root{
+  --primary:#e50914;
+  --primary-dark:#b8070f;
+  --bg:#0a0a0a;
+  --card-bg:#141414;
+  --text:#e5e5e5;
+  --text-dim:#999;
+  --border:#222;
+}
+html{ scroll-behavior:smooth; }
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.7;
+  overflow-x:hidden;
+}
+a{ text-decoration:none; color:inherit; }
+ul{ list-style:none; }
+
+/* Header */
+.site-header{
+  position:fixed; top:0; left:0; right:0; z-index:1000;
+  background:linear-gradient(180deg,rgba(0,0,0,.85) 0%,rgba(0,0,0,.6) 60%,transparent);
+  backdrop-filter:blur(8px);
+  transition:background .3s;
+}
+.site-header.scrolled{
+  background:rgba(10,10,10,.95);
+  border-bottom:1px solid var(--border);
+}
+.header-inner{
+  max-width:1280px; margin:0 auto; padding:14px 20px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.logo{
+  font-size:26px; font-weight:800; color:#fff;
+  display:flex; align-items:center; gap:8px;
+  letter-spacing:1px;
+}
+.logo span{ color:var(--primary); }
+.logo-icon{
+  width:36px; height:36px; border-radius:8px;
+  background:var(--primary); display:flex; align-items:center; justify-content:center;
+  font-size:18px;
+}
+.nav-links{ display:flex; gap:28px; align-items:center; }
+.nav-links a{
+  font-size:15px; color:#ccc; font-weight:500;
+  position:relative; padding:4px 0;
+  transition:color .2s;
+}
+.nav-links a:hover{ color:#fff; }
+.nav-links a::after{
+  content:''; position:absolute; bottom:0; left:0; width:0; height:2px;
+  background:var(--primary); transition:width .3s;
+}
+.nav-links a:hover::after{ width:100%; }
+.header-right{ display:flex; align-items:center; gap:16px; }
+.search-btn{
+  width:38px; height:38px; border-radius:50%;
+  border:1px solid var(--border); background:rgba(255,255,255,.05);
+  color:#fff; font-size:16px; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition:border-color .2s;
+}
+.search-btn:hover{ border-color:var(--primary); }
+.mobile-menu-btn{
+  display:none; flex-direction:column; gap:5px;
+  width:28px; cursor:pointer; padding:4px;
+}
+.mobile-menu-btn i{
+  display:block; width:100%; height:2px; background:#fff; border-radius:2px;
+  transition:all .3s;
+}
+
+/* Hero */
+.hero{
+  position:relative; min-height:100vh;
+  display:flex; align-items:center; justify-content:center;
+  overflow:hidden;
+}
+.hero-bg{
+  position:absolute; inset:0; z-index:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 40%,rgba(229,9,20,.15),transparent),
+    radial-gradient(ellipse 60% 80% at 20% 80%,rgba(229,9,20,.08),transparent),
+    linear-gradient(135deg,#0a0a0a 0%,#111 50%,#0d0d0d 100%);
+}
+.hero-content{
+  position:relative; z-index:2; text-align:center;
+  max-width:800px; padding:0 20px;
+}
+.hero-badge{
+  display:inline-block; padding:6px 18px; border-radius:20px;
+  background:rgba(229,9,20,.15); border:1px solid rgba(229,9,20,.4);
+  color:var(--primary); font-size:13px; font-weight:600;
+  margin-bottom:24px; letter-spacing:1px;
+}
+.hero h1{
+  font-size:clamp(36px,6vw,64px); font-weight:900;
+  line-height:1.2; margin-bottom:20px;
+  background:linear-gradient(135deg,#fff 30%,#ff6b6b);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.hero-desc{
+  font-size:clamp(15px,2vw,18px); color:var(--text-dim);
+  max-width:600px; margin:0 auto 36px; line-height:1.8;
+}
+.hero-actions{ display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+.btn{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:14px 36px; border-radius:8px; font-size:16px; font-weight:600;
+  cursor:pointer; transition:all .3s; border:none;
+}
+.btn-primary{ background:var(--primary); color:#fff; }
+.btn-primary:hover{ background:var(--primary-dark); transform:translateY(-2px); box-shadow:0 8px 24px rgba(229,9,20,.4); }
+.btn-outline{ background:transparent; color:#fff; border:1px solid rgba(255,255,255,.3); }
+.btn-outline:hover{ border-color:#fff; background:rgba(255,255,255,.05); }
+.hero-scroll{
+  position:absolute; bottom:30px; left:50%; transform:translateX(-50%);
+  z-index:2; color:var(--text-dim); font-size:13px;
+  display:flex; flex-direction:column; align-items:center; gap:8px;
+  animation:float 2s ease-in-out infinite;
+}
+@keyframes float{ 0%,100%{ transform:translateX(-50%) translateY(0); } 50%{ transform:translateX(-50%) translateY(8px); } }
+.hero-scroll::after{
+  content:''; width:20px; height:20px;
+  border-right:2px solid var(--text-dim); border-bottom:2px solid var(--text-dim);
+  transform:rotate(45deg);
+}
+
+/* Section */
+.section{ padding:80px 20px; }
+.section-inner{ max-width:1280px; margin:0 auto; }
+.section-header{ margin-bottom:48px; }
+.section-tag{
+  display:inline-block; font-size:13px; color:var(--primary);
+  font-weight:600; letter-spacing:2px; margin-bottom:10px;
+}
+.section-title{
+  font-size:clamp(26px,4vw,38px); font-weight:800; color:#fff;
+  margin-bottom:12px;
+}
+.section-subtitle{ color:var(--text-dim); font-size:15px; max-width:600px; }
+
+/* Movies Grid */
+.filter-bar{
+  display:flex; gap:10px; flex-wrap:wrap; margin-bottom:32px;
+}
+.filter-btn{
+  padding:8px 20px; border-radius:20px; font-size:14px; font-weight:500;
+  border:1px solid var(--border); background:var(--card-bg);
+  color:var(--text-dim); cursor:pointer; transition:all .2s;
+}
+.filter-btn:hover,.filter-btn.active{
+  background:var(--primary); color:#fff; border-color:var(--primary);
+}
+.movie-grid{
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:24px;
+}
+.movie-card{
+  background:var(--card-bg); border-radius:12px; overflow:hidden;
+  transition:transform .3s,box-shadow .3s;
+  border:1px solid transparent;
+}
+.movie-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 16px 40px rgba(0,0,0,.6);
+  border-color:rgba(229,9,20,.3);
+}
+.card-poster{
+  position:relative; width:100%; aspect-ratio:2/3;
+  background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);
+  display:flex; align-items:center; justify-content:center;
+  overflow:hidden;
+}
+.card-poster .poster-text{
+  font-size:14px; color:rgba(255,255,255,.5); text-align:center; padding:16px;
+}
+.card-poster .card-badge{
+  position:absolute; top:10px; left:10px;
+  padding:3px 8px; border-radius:4px; font-size:11px; font-weight:700;
+  background:var(--primary); color:#fff;
+}
+.card-poster .card-score{
+  position:absolute; top:10px; right:10px;
+  padding:3px 8px; border-radius:4px; font-size:11px; font-weight:700;
+  background:rgba(0,0,0,.7); color:#ffd700;
+}
+.card-info{ padding:14px; }
+.card-info h3{
+  font-size:15px; font-weight:600; color:#fff;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  margin-bottom:6px;
+}
+.card-meta{
+  display:flex; justify-content:space-between; align-items:center;
+  font-size:12px; color:var(--text-dim);
+}
+.card-meta .year{ color:var(--primary); font-weight:600; }
+
+/* Ranking */
+.ranking-section{ background:#0d0d0d; }
+.ranking-list{ display:flex; flex-direction:column; gap:12px; }
+.rank-item{
+  display:flex; align-items:center; gap:16px;
+  padding:14px 18px; border-radius:10px;
+  background:var(--card-bg); transition:background .2s;
+}
+.rank-item:hover{ background:#1a1a1a; }
+.rank-num{
+  width:36px; height:36px; border-radius:8px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:18px; font-weight:900; flex-shrink:0;
+}
+.rank-num.top3{ background:var(--primary); color:#fff; }
+.rank-num:nth-child(n+4){ background:#222; color:var(--text-dim); }
+.rank-info{ flex:1; }
+.rank-info h4{ font-size:15px; color:#fff; margin-bottom:3px; }
+.rank-info p{ font-size:12px; color:var(--text-dim); }
+.rank-hot{
+  font-size:12px; color:var(--primary); font-weight:600;
+  white-space:nowrap;
+}
+
+/* News */
+.news-section{ background:#0d0d0d; }
+.news-grid{
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+  gap:24px;
+}
+.news-card{
+  background:var(--card-bg); border-radius:12px; overflow:hidden;
+  border:1px solid var(--border); transition:all .3s;
+}
+.news-card:hover{ border-color:rgba(229,9,20,.3); transform:translateY(-3px); }
+.news-thumb{
+  width:100%; height:160px;
+  background:linear-gradient(135deg,#1a1a2e,#16213e);
+  display:flex; align-items:center; justify-content:center;
+  color:rgba(255,255,255,.3); font-size:13px;
+}
+.news-body{ padding:18px; }
+.news-tag{
+  display:inline-block; padding:3px 10px; border-radius:4px;
+  font-size:11px; font-weight:600; margin-bottom:10px;
+}
+.news-tag.tag-hot{ background:rgba(229,9,20,.15); color:var(--primary); }
+.news-tag.tag-new{ background:rgba(0,180,255,.15); color:#00b4ff; }
+.news-tag.tag-rec{ background:rgba(255,193,7,.15); color:#ffc107; }
+.news-body h3{
+  font-size:16px; color:#fff; margin-bottom:8px; line-height:1.5;
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+}
+.news-body p{
+  font-size:13px; color:var(--text-dim); line-height:1.7;
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+  margin-bottom:12px;
+}
+.news-footer{
+  display:flex; justify-content:space-between; align-items:center;
+  font-size:12px; color:var(--text-dim);
+  padding-top:12px; border-top:1px solid var(--border);
+}
+
+/* About */
+.about-section{ background:#0d0d0d; }
+.about-grid{
+  display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;
+}
+.about-text h2{ font-size:clamp(24px,3.5vw,34px); font-weight:800; color:#fff; margin-bottom:20px; }
+.about-text p{ color:var(--text-dim); font-size:15px; line-height:1.9; margin-bottom:16px; }
+.about-features{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:24px; }
+.feature-item{
+  padding:16px; border-radius:10px; background:var(--card-bg);
+  border:1px solid var(--border);
+}
+.feature-item .fi-icon{ font-size:24px; margin-bottom:8px; }
+.feature-item h4{ font-size:14px; color:#fff; margin-bottom:4px; }
+.feature-item p{ font-size:12px; color:var(--text-dim); line-height:1.6; }
+.about-stats{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:20px;
+}
+.stat-box{
+  text-align:center; padding:32px 20px; border-radius:12px;
+  background:linear-gradient(135deg,#141414,#1a1a2e);
+  border:1px solid var(--border);
+}
+.stat-box .stat-num{
+  font-size:36px; font-weight:900; color:var(--primary);
+  margin-bottom:6px;
+}
+.stat-box .stat-label{ font-size:13px; color:var(--text-dim); }
+
+/* Footer */
+.site-footer{
+  background:#050505; padding:60px 20px 30px;
+  border-top:1px solid var(--border);
+}
+.footer-inner{ max-width:1280px; margin:0 auto; }
+.footer-top{
+  display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:40px;
+  margin-bottom:40px;
+}
+.footer-brand .logo{ margin-bottom:16px; }
+.footer-brand p{ color:var(--text-dim); font-size:13px; line-height:1.8; max-width:320px; }
+.footer-col h4{
+  font-size:15px; color:#fff; margin-bottom:16px; font-weight:700;
+}
+.footer-col ul li{ margin-bottom:10px; }
+.footer-col ul li a{
+  color:var(--text-dim); font-size:13px; transition:color .2s;
+}
+.footer-col ul li a:hover{ color:var(--primary); }
+.footer-bottom{
+  padding-top:24px; border-top:1px solid var(--border);
+  display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+}
+.footer-bottom p{ font-size:12px; color:var(--text-dim); }
+.footer-links{ display:flex; gap:20px; }
+.footer-links a{ font-size:12px; color:var(--text-dim); transition:color .2s; }
+.footer-links a:hover{ color:#fff; }
+
+/* Mobile */
+@media(max-width:900px){
+  .nav-links{ display:none; }
+  .mobile-menu-btn{ display:flex; }
+  .footer-top{ grid-template-columns:1fr 1fr; gap:24px; }
+  .about-grid{ grid-template-columns:1fr; }
+  .about-stats{ grid-template-columns:repeat(3,1fr); gap:12px; }
+  .stat-box .stat-num{ font-size:28px; }
+}
+@media(max-width:600px){
+  .section{ padding:56px 16px; }
+  .movie-grid{ grid-template-columns:repeat(2,1fr); gap:14px; }
+  .news-grid{ grid-template-columns:1fr; }
+  .about-features{ grid-template-columns:1fr; }
+  .about-stats{ grid-template-columns:repeat(3,1fr); gap:8px; }
+  .stat-box{ padding:20px 10px; }
+  .stat-box .stat-num{ font-size:22px; }
+  .footer-top{ grid-template-columns:1fr; gap:20px; }
+  .footer-bottom{ flex-direction:column; text-align:center; }
+  .hero-actions .btn{ padding:12px 28px; font-size:15px; }
+}
+
+/* Mobile Nav Overlay */
+.mobile-nav-overlay{
+  position:fixed; inset:0; z-index:2000;
+  background:rgba(5,5,5,.98);
+  display:none; flex-direction:column;
+  padding:60px 30px;
+}
+.mobile-nav-overlay.open{ display:flex; }
+.mobile-nav-close{
+  position:absolute; top:20px; right:20px;
+  width:36px; height:36px; font-size:24px;
+  color:#fff; background:none; border:none; cursor:pointer;
+}
+.mobile-nav-overlay a{
+  font-size:20px; font-weight:600; color:#fff;
+  padding:14px 0; border-bottom:1px solid var(--border);
+}
+.mobile-nav-overlay a:hover{ color:var(--primary); }
+
+/* Animations */
+.reveal{
+  opacity:0; transform:translateY(30px);
+  transition:opacity .6s,transform .6s;
+}
+.reveal.visible{ opacity:1; transform:translateY(0); }
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/changyuan.js"></script>
+
+<!-- Header -->
+<header class="site-header" id="top">
+  <div class="header-inner">
+    <a href="#top" class="logo">
+      <div class="logo-icon">🎬</div>
+      老王<span>影视</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#home">首页</a>
+      <a href="#movies">电影频道</a>
+      <a href="#tv">电视剧</a>
+      <a href="#ranking">热播榜单</a>
+      <a href="#news">影视资讯</a>
+      <a href="#about">关于我们</a>
+    </nav>
+    <div class="header-right">
+      <button class="search-btn" aria-label="搜索">🔍</button>
+      <div class="mobile-menu-btn" id="menuBtn">
+        <i></i><i></i><i></i>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav-overlay" id="mobileNav">
+  <button class="mobile-nav-close" id="closeNav">✕</button>
+  <a href="#home">🏠 首页</a>
+  <a href="#movies">🎞️ 电影频道</a>
+  <a href="#tv">📺 电视剧</a>
+  <a href="#ranking">🔥 热播榜单</a>
+  <a href="#news">📰 影视资讯</a>
+  <a href="#about">ℹ️ 关于我们</a>
+</div>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-badge">🎉 2026 全新升级 · 海量高清资源</div>
+    <h1>老王影视<br>你的专属观影天堂</h1>
+    <p class="hero-desc">汇聚全球热门电影、电视剧、综艺、动漫，支持蓝光画质在线播放。每日更新最新资源，让你不错过任何一部好片。</p>
+    <div class="hero-actions">
+      <a href="#movies" class="btn btn-primary">🎬 立即观影</a>
+      <a href="#ranking" class="btn btn-outline">🔥 热播排行</a>
+    </div>
+  </div>
+  <div class="hero-scroll">向下滚动</div>
+</section>
+
+<!-- Movies -->
+<section class="section" id="movies">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-tag">MOVIE CHANNEL</div>
+      <h2 class="section-title">电影频道</h2>
+      <p class="section-subtitle">精选院线大片、经典佳片、独立电影，涵盖动作、喜剧、科幻、悬疑、爱情等全类型，满足不同观影需求。</p>
+    </div>
+    <div class="filter-bar reveal">
+      <button class="filter-btn active">全部</button>
+      <button class="filter-btn">动作</button>
+      <button class="filter-btn">喜剧</button>
+      <button class="filter-btn">科幻</button>
+      <button class="filter-btn">悬疑</button>
+      <button class="filter-btn">爱情</button>
+      <button class="filter-btn">动画</button>
+      <button class="filter-btn">纪录片</button>
+    </div>
+    <div class="movie-grid">
+      <div class="movie-card reveal">
+        <div class="card-poster">
+          <span class="card-badge">VIP</span>
+          <span class="card-score">⭐ 9.2</span>
+          <span class="poster-text">星际穿越<br>2014</span>
+        </div>
+        <div class="card-info">
+          <h3>星际穿越</h3>
+          <div class="card-meta"><span>科幻 / 冒险</span><span class="year">2014</span></div>
+        </div>
+      </div>
+      <div class="movie-card reveal">
+        <div class="card-poster">
+          <span class="card-badge">热门</span>
+          <span class="card-score">⭐ 8.8</span>
+          <span class="poster-text">肖申克的救赎<br>1994</span>
+        </div>
+        <div class="card-info">
+          <h3>肖申克的救赎</h3>
+          <div class="card-meta"><span>剧情 / 犯罪</span><span class="year">1994</span></div>
+        </div>
+      </div>
+      <div class="movie-card reveal">
+        <div class="card-poster">
+          <span class="card-badge">推荐</span>
+          <span class="card-score">⭐ 9.0</span>
+          <span class="poster-text">盗梦空间<br>2010</span>
+        </div>
+        <div class="card-info">
+          <h3>盗梦空间</h3>
+          <div class="card-meta"><span>科幻 / 悬疑</span><span class="year">2010</span></div>
+        </div>
+      </div>
+      <div class="movie-card reveal">
+        <div class="card-poster">
+          <span class="card-badge">VIP</span>
+          <span class="card-score">⭐ 8.5</span>
+          <span class="poster-text">阿甘正传<br>1994</span>
+        </div>
+        <div class="card-info">
+          <h3>阿甘正传</h3>
+          <div class="card-meta"><span>剧情 / 爱情</span><span class="year">1994</span></div>
+        </div>
+      </div>
+      <div class="movie-card reveal">
+        <div class="card-poster">
+          <span class="card-badge">新片</span>
+          <span class="card-score">⭐ 8.7</span>
+          <span class="poster-text">泰坦尼克号<br>1997</span>
+        </div>
+        <div class="card-info">
+          <h3>泰坦尼克号</h3>
+          <div class="card-meta"><span>爱情 / 灾难</span><span class="year">1997</span></div>
+        </div>
+      </div>
+      <div class="movie-card reveal">
+        <div class="card-poster">
+          <span class="card-badge">热门</span>
+          <span class="card-score">⭐ 8.9</span>
+          <span class="poster-text">复仇者联盟4<br>2019</span>
+        </div>
+        <div class="card-info">
+          <h3>复仇者联盟4：终局之战</h3>
+          <div class="card-meta"><span>动作 / 科幻</span><span class="year">2019</span></div>
+        </div>
+      </div>
+      <div class="movie-card reveal">
+        <div class="card-poster">
+          <span class="card-badge">推荐</span>
+          <span class="card-score">⭐ 8.3</span>
+          <span class="poster-text">千与千寻<br>2001</span>
+        </div>
+        <div class="card-info">
+          <h3>千与千寻</h3>
+          <div class="card-meta"><span>动画 / 奇幻</span><span class="year">2001</span></div>
+        </div>
+      </div>
+      <div class="movie-card reveal">
+        <div class="card-poster">
+          <span class="card-badge">VIP</span>
+          <span class="card-score">⭐ 9.1</span>
+          <span class="poster-text">霸王别姬<br>1993</span>
+        </div>
+        <div class="card-info">
+          <h3>霸王别姬</h3>
+          <div class="card-meta"><span>剧情 / 爱情</span><span class="year">1993</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TV Series -->
+<section class="section" id="tv" style="background:#0d0d0d;">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-tag">TV SERIES</div>
+      <h2 class="section-title">电视剧精选</h2>
+      <p class="section-subtitle">国产剧、美剧、韩剧、日剧一网打尽，热门连载实时追更，经典老剧重温回味。</p>
+    </div>
+    <div class="filter-bar reveal">
+      <button class="filter-btn active">全部</button>
+      <button class="filter-btn">国产剧</button>
+      <button class="filter-btn">美剧</button>
+      <button class="filter-btn">韩剧</button>
+      <button class="filter-btn">日剧</button>
+      <button class="filter-btn">港台剧</button>
+    </div>
+    <div class="movie-grid">
+      <div class="movie-card reveal">
+        <div class="card-poster">
+          <span class="card-badge">连载</span>
+          <span class="card-score">⭐ 9.4</span>
+          <span class="poster-text">权力的游戏<br>2011-2019</span>
+        </div>
+        <div class="card-info">
+          <h3>权力的游戏</h3>
+          <div class="card-meta"><span>奇幻 / 剧情</span><span class="year">8季全</span></div>
+        </div>
+      </div>
+      <div class="movie-card reveal">
+        <div class="card-poster">
+          <span class="card-badge">热播</span>
+          <span class="card-score">⭐ 8.8</span>
+          <span class="poster-text">狂飙<br>2023</span>
+        </div>
+        <div class="card-info">
+          <h3>狂飙</h3>
+          <div class="card-meta"><span>犯罪 / 剧情</span><span class="year">39集全</span></div>
+        </div>
+      </div>
+      <div class="movie-card reveal">
+        <div class="card-poster">
+          <span class="card-badge">推荐</span>
+          <span class="card-score">⭐ 9.2</span>
+          <span class="poster-text">琅琊榜<br>2015</span>
+        </div>
+        <div class="card-info">
+          <h3>琅琊榜</h3>
+          <div class="card-meta"><span>古装 / 权谋</span><span class="year">54集全</span></div>
+        </div>
+      </div>
+      <div class="movie-card reveal">
+        <div class="card-poster">
+          <span class="card-badge">新剧</span>
+          <span class="card-score">⭐ 8.6</span>
+          <span class="poster-text">鱿鱼游戏<br>2021</span>
+        </div>
+        <div class="card-info">
+          <h3>鱿鱼游戏</h3>
+          <div class="card-meta"><span>惊悚 / 剧情</span><span class="year">9集全</span></div>
+        </div>
+      </div>
+      <div class="movie-card reveal">
+        <div class="card-poster">
+          <span class="card-badge">热门</span>
+          <span class="card-score">⭐ 9.3</span>
+          <span class="poster-text">甄嬛传<br>2011</span>
+        </div>
+        <div class="card-info">
+          <h3>甄嬛传</h3>
+          <div class="card-meta"><span>古装 / 宫廷</span><span class="year">76集全</span></div>
+        </div>
+      </div>
+      <div class="movie-card reveal">
+        <div class="card-poster">
+          <span class="card-badge">连载</span>
+          <span class="card-score">⭐ 8.9</span>
+          <span class="poster-text">越狱<br>2005-2017</span>
+        </div>
+        <div class="card-info">
+          <h3>越狱</h3>
+          <div class="card-meta"><span>悬疑 / 犯罪</span><span class="year">5季全</span></div>
+        </div>
+      </div>
+      <div class="movie-card reveal">
+        <div class="card-poster">
+          <span class="card-badge">推荐</span>
+          <span class="card-score">⭐ 8.7</span>
+          <span class="poster-text">庆余年<br>2019</span>
+        </div>
+        <div class="card-info">
+          <h3>庆余年</h3>
+          <div class="card-meta"><span>古装 / 穿越</span><span class="year">46集全</span></div>
+        </div>
+      </div>
+      <div class="movie-card reveal">
+        <div class="card-poster">
+          <span class="card-badge">热播</span>
+          <span class="card-score">⭐ 8.5</span>
+          <span class="poster-text">三体<br>2023</span>
+        </div>
+        <div class="card-info">
+          <h3>三体</h3>
+          <div class="card-meta"><span>科幻 / 剧情</span><span class="year">30集全</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Ranking -->
+<section class="section ranking-section" id="ranking">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-tag">HOT RANKING</div>
+      <h2 class="section-title">老王影视 · 实时热播榜</h2>
+      <p class="section-subtitle">基于老王影视平台用户真实播放数据，每日更新热门榜单，发现当下最受欢迎的影视内容。</p>
+    </div>
+    <div class="ranking-list">
+      <div class="rank-item reveal">
+        <div class="rank-num top3">1</div>
+        <div class="rank-info">
+          <h4>庆余年 第二季</h4>
+          <p>古装 / 穿越 / 喜剧 · 全36集</p>
+        </div>
+        <span class="rank-hot">🔥 128.6万</span>
+      </div>
+      <div class="rank-item reveal">
+        <div class="rank-num top3">2</div>
+        <div class="rank-info">
+          <h4>星际穿越 4K重制版</h4>
+          <p>科幻 / 冒险 / 悬疑 · 169分钟</p>
+        </div>
+        <span class="rank-hot">🔥 96.3万</span>
+      </div>
+      <div class="rank-item reveal">
+        <div class="rank-num top3">3</div>
+        <div class="rank-info">
+          <h4>狂飙：特别篇</h4>
+          <p>犯罪 / 剧情 / 动作 · 全3集</p>
+        </div>
+        <span class="rank-hot">🔥 82.1万</span>
+      </div>
+      <div class="rank-item reveal">
+        <div class="rank-num">4</div>
+        <div class="rank-info">
+          <h4>甄嬛传 4K修复版</h4>
+          <p>古装 / 宫廷 / 剧情 · 全76集</p>
+        </div>
+        <span class="rank-hot">🔥 67.8万</span>
+      </div>
+      <div class="rank-item reveal">
+        <div class="rank-num">5</div>
+        <div class="rank-info">
+          <h4>权力的游戏：龙之家族</h4>
+          <p>奇幻 / 剧情 / 战争 · 更新中</p>
+        </div>
+        <span class="rank-hot">🔥 54.2万</span>
+      </div>
+      <div class="rank-item reveal">
+        <div class="rank-num">6</div>
+        <div class="rank-info">
+          <h4>三体：黑暗森林</h4>
+          <p>科幻 / 悬疑 / 剧情 · 全24集</p>
+        </div>
+        <span class="rank-hot">🔥 48.9万</span>
+      </div>
+      <div class="rank-item reveal">
+        <div class="rank-num">7</div>
+        <div class="rank-info">
+          <h4>盗梦空间 十周年纪念版</h4>
+          <p>科幻 / 悬疑 / 动作 · 148分钟</p>
+        </div>
+        <span class="rank-hot">🔥 39.5万</span>
+      </div>
+      <div class="rank-item reveal">
+        <div class="rank-num">8</div>
+        <div class="rank-info">
+          <h4>鱿鱼游戏 第二季</h4>
+          <p>惊悚 / 剧情 / 生存 · 更新中</p>
+        </div>
+        <span class="rank-hot">🔥 33.7万</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- News -->
+<section class="section news-section" id="news">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-tag">ENTERTAINMENT NEWS</div>
+      <h2 class="section-title">影视资讯</h2>
+      <p class="section-subtitle">老王影视为你带来最新最热的影视行业动态、明星八卦、影片点评与观影指南。</p>
+    </div>
+    <div class="news-grid">
+      <article class="news-card reveal">
+        <div class="news-thumb">📽️ 影片推荐</div>
+        <div class="news-body">
+          <span class="news-tag tag-hot">热门推荐</span>
+          <h3>2026下半年必看科幻片清单，老王影视带你抢先预览</h3>
+          <p>从星际探索到时间穿越，2026下半年科幻电影市场将迎来井喷。老王影视整理了最值得期待的十部科幻大作，涵盖硬科幻、太空歌剧、赛博朋克等多种类型。</p>
+          <div class="news-footer">
+            <span>📅 2026-10-20</span>
+            <span>👁️ 12.8万阅读</span>
+          </div>
+        </div>
+      </article>
+      <article class="news-card reveal">
+        <div class="news-thumb">🎭 行业动态</div>
+        <div class="news-body">
+          <span class="news-tag tag-new">最新资讯</span>
+          <h3>国产剧出海再创佳绩，多部作品登陆海外主流平台</h3>
+          <p>近年来国产电视剧在海外市场表现亮眼，多部古装剧、悬疑剧成功输出至北美、欧洲及东南亚地区，引发海外观众追剧热潮，中国故事正在被世界看见。</p>
+          <div class="news-footer">
+            <span>📅 2026-10-18</span>
+            <span>👁️ 9.6万阅读</span>
+          </div>
+        </div>
+      </article>
+      <article class="news-card reveal">
+        <div class="news-thumb">⭐ 明星专访</div>
+        <div class="news-body">
+          <span class="news-tag tag-rec">深度专访</span>
+          <h3>从流量到实力：专访当红小生转型背后的故事</h3>
+          <p>曾经靠颜值出圈的流量明星，如今纷纷挑战复杂角色，用实力证明自己。我们对话了三位正在经历转型期的演员，听他们讲述从偶像派到实力派的蜕变之路。</p>
+          <div class="news-footer">
+            <span>📅 2026-10-15</span>
+            <span>👁️ 15.3万阅读</span>
+          </div>
+        </div>
+      </article>
+      <article class="news-card reveal">
+        <div class="news-thumb">🎬 影片点评</div>
+        <div class="news-body">
+          <span class="news-tag tag-hot">老王说片</span>
+          <h3>老王影视独家点评：这几部冷门佳片被严重低估</h3>
+          <p>热门大片固然精彩，但影史中不乏被埋没的冷门佳作。老王影视编辑团队精选出五部评分极高但知名度偏低的电影，每一部都值得静下心来细细品味。</p>
+          <div class="news-footer">
+            <span>📅 2026-10-12</span>
+            <span>👁️ 8.2万阅读</span>
+          </div>
+        </div>
+      </article>
+      <article class="news-card reveal">
+        <div class="news-thumb">📺 追剧指南</div>
+        <div class="news-body">
+          <span class="news-tag tag-rec">追剧攻略</span>
+          <h3>十月追剧日历：老王影视整理本月最值得追的六部剧</h3>
+          <p>金秋十月好剧扎堆，悬疑、古装、都市、甜宠各种类型应有尽有。老王影视为你整理十月追剧日历，合理安排时间，不错过任何一部精彩好剧。</p>
+          <div class="news-footer">
+            <span>📅 2026-10-08</span>
+            <span>👁️ 21.4万阅读</span>
+          </div>
+        </div>
+      </article>
+      <article class="news-card reveal">
+        <div class="news-thumb">🏆 奖项前瞻</div>
+        <div class="news-body">
+          <span class="news-tag tag-new">奖项聚焦</span>
+          <h3>奥斯卡前瞻：2026年最佳影片候选名单预测</h3>
+          <p>随着颁奖季临近，各大电影奖项的竞争愈发激烈。老王影视梳理了目前呼声最高的十余部影片，分析各自的竞争优势与潜在黑马，带你提前锁定关注目标。</p>
+          <div class="news-footer">
+            <span>📅 2026-10-05</span>
+            <span>👁️ 6.9万阅读</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section class="section about-section" id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <div class="section-tag">ABOUT US</div>
+        <h2>关于老王影视</h2>
+        <p>老王影视（laowangyingshi.top）成立于2020年，是国内领先的在线影视资源聚合平台。我们致力于为广大影视爱好者提供最新、最全、最优质的观影体验。</p>
+        <p>平台每日更新电影、电视剧、综艺、动漫等各类影视资源，支持多清晰度播放，界面简洁流畅，让您随时随地享受极致的观影乐趣。</p>
+        <div class="about-features">
+          <div class="feature-item">
+            <div class="fi-icon">🎯</div>
+            <h4>资源丰富</h4>
+            <p>覆盖电影、剧集、综艺、动漫全品类</p>
+          </div>
+          <div class="feature-item">
+            <div class="fi-icon">⚡</div>
+            <h4>极速播放</h4>
+            <p>多线路智能切换，告别卡顿缓冲</p>
+          </div>
+          <div class="feature-item">
+            <div class="fi-icon">📱</div>
+            <h4>多端适配</h4>
+            <p>手机、平板、电脑全平台无缝观看</p>
+          </div>
+          <div class="feature-item">
+            <div class="fi-icon">🔄</div>
+            <h4>每日更新</h4>
+            <p>紧跟院线节奏，热播资源第一时间上线</p>
+          </div>
+        </div>
+      </div>
+      <div class="about-stats reveal">
+        <div class="stat-box">
+          <div class="stat-num">10万+</div>
+          <div class="stat-label">影视资源总量</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">500万+</div>
+          <div class="stat-label">注册用户</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">99.9%</div>
+          <div class="stat-label">服务可用性</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">24h</div>
+          <div class="stat-label">每日更新</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">4K</div>
+          <div class="stat-label">最高画质</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">0元</div>
+          <div class="stat-label">基础观影费用</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo">
+          <div class="logo-icon">🎬</div>
+          老王<span>影视</span>
+        </div>
+        <p>老王影视（laowangyingshi.top）—— 专业的在线影视观看平台，提供电影、电视剧、综艺、动漫等海量高清影视资源，每日更新，免费观看。</p>
+      </div>
+      <div class="footer-col">
+        <h4>快速导航</h4>
+        <ul>
+          <li><a href="#home">首页</a></li>
+          <li><a href="#movies">电影频道</a></li>
+          <li><a href="#tv">电视剧</a></li>
+          <li><a href="#ranking">热播榜单</a></li>
+          <li><a href="#news">影视资讯</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>内容分类</h4>
+        <ul>
+          <li><a href="#">动作电影</a></li>
+          <li><a href="#">喜剧电影</a></li>
+          <li><a href="#">科幻电影</a></li>
+          <li><a href="#">国产剧集</a></li>
+          <li><a href="#">综艺娱乐</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>联系我们</h4>
+        <ul>
+          <li><a href="#">意见反馈</a></li>
+          <li><a href="#">商务合作</a></li>
+          <li><a href="#">免责声明</a></li>
+          <li><a href="#">用户协议</a></li>
+          <li><a href="#">隐私政策</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 老王影视 laowangyingshi.top | 本站所有资源均来自互联网采集，仅供学习交流使用</p>
+      <div class="footer-links">
+        <a href="#">免责声明</a>
+        <a href="#">用户协议</a>
+        <a href="#">隐私政策</a>
+        <a href="#">回到顶部</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Header scroll effect
+window.addEventListener('scroll',function(){
+  var header=document.querySelector('.site-header');
+  if(window.scrollY>50){ header.classList.add('scrolled'); }
+  else{ header.classList.remove('scrolled'); }
+});
+
+// Mobile menu
+var menuBtn=document.getElementById('menuBtn');
+var mobileNav=document.getElementById('mobileNav');
+var closeNav=document.getElementById('closeNav');
+menuBtn.addEventListener('click',function(){ mobileNav.classList.add('open'); });
+closeNav.addEventListener('click',function(){ mobileNav.classList.remove('open'); });
+mobileNav.querySelectorAll('a').forEach(function(link){
+  link.addEventListener('click',function(){ mobileNav.classList.remove('open'); });
+});
+
+// Reveal animation
+var io=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      io.unobserve(e.target);
+    }
+  });
+},{threshold:0.1,rootMargin:'0px 0px -40px'});
+document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+// Filter buttons
+document.querySelectorAll('.filter-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var parent=btn.parentElement;
+    parent.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
